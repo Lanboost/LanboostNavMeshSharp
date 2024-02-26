@@ -1,0 +1,224 @@
+[gd_scene load_steps=11 format=3 uid="uid://chg8y8bocs84r"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_hsdud"]
+[ext_resource type="TileSet" uid="uid://bbb2d0187ri6x" path="res://TestTileSet.tres" id="2_825p6"]
+[ext_resource type="Script" path="res://TileMapEvents.cs" id="3_7vs0c"]
+[ext_resource type="Script" path="res://PointDrawer.cs" id="3_h7w7l"]
+[ext_resource type="Script" path="res://BaseWorldRenderer.cs" id="4_5youd"]
+[ext_resource type="PackedScene" uid="uid://b6u45xsedicl2" path="res://point.tscn" id="4_nfgrn"]
+[ext_resource type="PackedScene" uid="uid://cnvmw8c7f37yg" path="res://zoom_pan_camera_2d.tscn" id="5_bpms5"]
+[ext_resource type="Script" path="res://CollisionRenderer.cs" id="5_xek2y"]
+[ext_resource type="Script" path="res://NavMeshRenderer.cs" id="6_pg0qb"]
+[ext_resource type="PackedScene" uid="uid://c1tqpeeqlnr6k" path="res://rect_draw.tscn" id="9_6l5u6"]
+
+[node name="Node" type="Node"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(848, 648)
+render_target_update_mode = 4
+
+[node name="main" type="Node2D" parent="HBoxContainer/SubViewportContainer2/SubViewport" node_paths=PackedStringArray("tilemap", "TileMapEvents", "pathLine", "funnelLine", "leftLine", "rightLine", "helpLabel", "drawer", "toggleCollisionDisplay", "toggleCollisionlayerButton")]
+script = ExtResource("1_hsdud")
+tilemap = NodePath("TileMap")
+TileMapEvents = NodePath("TileMap/TileMapEvents")
+pathLine = NodePath("Path")
+funnelLine = NodePath("Funnel")
+leftLine = NodePath("FunnelLeft")
+rightLine = NodePath("FunnelRight")
+helpLabel = NodePath("Label")
+drawer = NodePath("PointDrawer")
+toggleCollisionDisplay = NodePath("../../../Panel/VBoxContainer/Button")
+toggleCollisionlayerButton = NodePath("../../../Panel/VBoxContainer/OptionButton")
+
+[node name="TileMap" type="TileMap" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+tile_set = ExtResource("2_825p6")
+format = 2
+layer_0/tile_data = PackedInt32Array(6, 3, 0, 524294, 3, 0, 589830, 3, 0, 458758, 3, 0, 393222, 3, 0, 327686, 3, 0, 262150, 3, 0, 196614, 3, 0, 131078, 3, 0, 65542, 3, 0, 5, 3, 0, 4, 3, 0, 65540, 3, 0, 131076, 3, 0, 196612, 3, 0, 262148, 3, 0, 327684, 3, 0, 393221, 3, 0, 458757, 3, 0, 524293, 3, 0, 589829, 3, 0, 589828, 3, 0, 524292, 3, 0, 458756, 3, 0, 393220, 3, 0, 262149, 3, 0, 196613, 3, 0, 131077, 3, 0, 65541, 3, 0, 327685, 3, 0, 655365, 65539, 0, 720901, 65539, 0, 786437, 65539, 0, 851973, 65539, 0, 917509, 65539, 0)
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = ""
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = ""
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = 0
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = ""
+layer_4/enabled = true
+layer_4/modulate = Color(1, 1, 1, 1)
+layer_4/y_sort_enabled = false
+layer_4/y_sort_origin = 0
+layer_4/z_index = 0
+layer_4/tile_data = PackedInt32Array()
+layer_5/name = ""
+layer_5/enabled = true
+layer_5/modulate = Color(1, 1, 1, 1)
+layer_5/y_sort_enabled = false
+layer_5/y_sort_origin = 0
+layer_5/z_index = 0
+layer_5/tile_data = PackedInt32Array()
+layer_6/name = ""
+layer_6/enabled = true
+layer_6/modulate = Color(1, 1, 1, 1)
+layer_6/y_sort_enabled = false
+layer_6/y_sort_origin = 0
+layer_6/z_index = 0
+layer_6/tile_data = PackedInt32Array()
+layer_7/name = ""
+layer_7/enabled = true
+layer_7/modulate = Color(1, 1, 1, 1)
+layer_7/y_sort_enabled = false
+layer_7/y_sort_origin = 0
+layer_7/z_index = 0
+layer_7/tile_data = PackedInt32Array()
+
+[node name="TileMapEvents" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport/main/TileMap"]
+script = ExtResource("3_7vs0c")
+
+[node name="BaseWorldRenderer" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport/main/TileMap" node_paths=PackedStringArray("main", "tileMap")]
+script = ExtResource("4_5youd")
+main = NodePath("../..")
+tileMap = NodePath("..")
+
+[node name="CollisionRenderer" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport/main/TileMap" node_paths=PackedStringArray("main", "tileMap", "tileMapSubdivided")]
+script = ExtResource("5_xek2y")
+main = NodePath("../..")
+tileMap = NodePath("..")
+tileMapSubdivided = NodePath("../../TileMap2")
+layer = 1
+
+[node name="NavMeshRenderer" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport/main/TileMap" node_paths=PackedStringArray("main", "tileMap", "tileMapSubdivided", "PointDrawer")]
+script = ExtResource("6_pg0qb")
+main = NodePath("../..")
+tileMap = NodePath("..")
+tileMapSubdivided = NodePath("../../TileMap2")
+layer = 2
+PointDrawer = NodePath("../../PointDrawer")
+
+[node name="TileMap2" type="TileMap" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+scale = Vector2(0.333, 0.333)
+tile_set = ExtResource("2_825p6")
+format = 2
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = ""
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = ""
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = 0
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = ""
+layer_4/enabled = true
+layer_4/modulate = Color(1, 1, 1, 1)
+layer_4/y_sort_enabled = false
+layer_4/y_sort_origin = 0
+layer_4/z_index = 0
+layer_4/tile_data = PackedInt32Array()
+layer_5/name = ""
+layer_5/enabled = true
+layer_5/modulate = Color(1, 1, 1, 1)
+layer_5/y_sort_enabled = false
+layer_5/y_sort_origin = 0
+layer_5/z_index = 0
+layer_5/tile_data = PackedInt32Array()
+layer_6/name = ""
+layer_6/enabled = true
+layer_6/modulate = Color(1, 1, 1, 1)
+layer_6/y_sort_enabled = false
+layer_6/y_sort_origin = 0
+layer_6/z_index = 0
+layer_6/tile_data = PackedInt32Array()
+layer_7/name = ""
+layer_7/enabled = true
+layer_7/modulate = Color(1, 1, 1, 1)
+layer_7/y_sort_enabled = false
+layer_7/y_sort_origin = 0
+layer_7/z_index = 0
+layer_7/tile_data = PackedInt32Array()
+
+[node name="Path" type="Line2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Funnel" type="Line2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+width = 1.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="FunnelLeft" type="Line2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+width = 1.0
+default_color = Color(1, 0, 1, 1)
+
+[node name="FunnelRight" type="Line2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+width = 1.0
+default_color = Color(0, 1, 1, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PointDrawer" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+script = ExtResource("3_h7w7l")
+scale = 32.0
+pointPrefab = ExtResource("4_nfgrn")
+rectPrefab = ExtResource("9_6l5u6")
+
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main"]
+
+[node name="ZoomPanCamera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport/main/Camera2D" instance=ExtResource("5_bpms5")]
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Collision Display"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2

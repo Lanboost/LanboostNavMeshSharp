@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1tqpeeqlnr6k"]
+
+[ext_resource type="Texture2D" uid="uid://bhl6ythnk4pai" path="res://rect.png" id="1_0yqjt"]
+
+[node name="rect_draw" type="NinePatchRect"]
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("1_0yqjt")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
